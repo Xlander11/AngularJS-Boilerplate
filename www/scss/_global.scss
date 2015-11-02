@@ -1,0 +1,20 @@
+#page{
+  background: $background;
+}
+
+#menu{
+
+  ul{
+    display: flex;flex: 1 1 100%;justify-content: center;
+
+    li{
+      text-align: center;padding: 5px 10px;
+
+      a{
+        color: $anchorColor;
+
+        &.active{color: $anchorColorActivate;}
+      }
+    }
+  }
+}
