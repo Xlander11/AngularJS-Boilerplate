@@ -8,13 +8,14 @@
     angular.module("app")
         .config(config)
         .constant("CONSTANTS", {
-            assets: ''
+            assets: "",
+            js: "js"
         });
 
-    function config($stateProvider){
+    function config($stateProvider, $urlRouterProvider){
         $stateProvider
             .state('index', {
-                url: "",
+                url: "/index",
                 views: {
                     page: {
                         templateUrl: 'views/index.html'
@@ -29,6 +30,9 @@
                     }
                 }
             });
+
+        $urlRouterProvider.when("", "/index");
+        $urlRouterProvider.otherwise("/index");
     }
 
 })(window, angular);

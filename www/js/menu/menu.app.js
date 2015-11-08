@@ -6,19 +6,21 @@
     'use strict';
 
     /**
-    * @desc
+    * @desc Menu Directive
     * @example <menu></menu>
     */
     angular
-        .module("app")
+        .module("menuApp", [
+            "DataService"
+        ])
         .directive("menu", Menu);
+    
+    Menu.$inject = ["CONSTANTS", "$rootScope", "$state", "services"];
 
-    Menu.$inject = ["CONSTANTS", "$rootScope"];
-
-    function Menu(CONSTANTS, $rootScope) {
+    function Menu(CONSTANTS, $rootScope, $state, services) {
         var directive = {
             restrict: 'EA',
-            templateUrl: CONSTANTS.assets + "menu/menu.html",
+            templateUrl: CONSTANTS.js + "/menu/menu.html",
             link: link,
             controller: MenuController,
             /*
@@ -32,14 +34,25 @@
         function link(scope, element, attrs) {
             $rootScope.$on("state:change", function(event, data){
                 /* When a page is changed */
-                var elmt = element.find("a");
-                
-                for(var i = 0;i < elmt.length;i++){
-                    $(elmt[i]).removeClass("active");
-                }
+                removeActiveClass(element, function (el) {
+                    data.element.addClass("active");
+                });
 
-                data.element.addClass("active");
             });
+
+            services.isLoaded();
+        }
+
+        function removeActiveClass(el, callback){
+            var elmt = el.find("a");
+
+            for(var i = 0;i < elmt.length;i++){
+                angular.element(elmt[i]).removeClass("active");
+            }
+
+            if(callback) {
+                callback(elmt);
+            }
         }
     }
 

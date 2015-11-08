@@ -5,22 +5,11 @@
     <title></title>
     <link href="css/style.css" rel="stylesheet" />
 
-    <script src="lib/jquery-1.11.3.min.js"></script>
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-ui-router.min.js"></script>
-
-    <!--CONFIG FILE-->
-    <script src="app.module.js"></script>
-    <script src="app.config.js"></script>
-
-    <!--SERVICES-->
-
-    <!--DIRECTIVE-->
-    <script src="menu/menu.js"></script>
-    <script src="menu/menu.item.js"></script>
 </head>
 <body ng-app="app">
     <menu></menu>
     <div id="page" ui-view="page"></div>
+
+    <script src="functions.js"></script>
 </body>
 </html>

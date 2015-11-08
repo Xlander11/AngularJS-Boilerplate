@@ -6,11 +6,11 @@
     'use strict';
 
     /**
-    * @desc 
-    * @example 
+    * @desc Menu Item Directive
+    * @example <menu-item></menu-item>
     */
     angular
-        .module("app")
+        .module("menuApp")
         .directive("menuItem", MenuItem);
     
     MenuItem.$inject = ["CONSTANTS", "$rootScope", "$state"];
@@ -18,7 +18,7 @@
     function MenuItem(CONSTANTS, $rootScope, $state) {
         var directive = {
             restrict: "EA",
-            templateUrl: CONSTANTS.assets + "menu/menu.item.html",
+            templateUrl: CONSTANTS.js + "/menu/menu.item.html",
             scope: {
                 item: "=item"
             },
@@ -27,6 +27,10 @@
         return directive;
 
         function link(scope, element, attrs) {
+            if($state.current.name == scope.item.state){
+                element.find("a").addClass("active");
+            }
+
             element.on('click', function (event) {
                 var url = element.find("a").attr("href");
 

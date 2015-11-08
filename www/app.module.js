@@ -7,6 +7,7 @@
 
     angular
     .module("app", [
-        'ui.router'
+        "ui.router",
+        "menuApp"
     ]);
 })(window, angular);
