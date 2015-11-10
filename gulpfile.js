@@ -53,6 +53,7 @@ gulp.task("browser-sync", function() {
     gulp.watch([dirname + "/app.module.js", dirname + "/app.config.js"], ["scripts"]);
     gulp.watch(dirname + "/css/*.css").on("change", browserSync.reload);
     gulp.watch(dirname + "/views/*.html").on("change", browserSync.reload);
+    gulp.watch(dirname + "/*.html").on("change", browserSync.reload);
     gulp.watch(dirname + "/js/**/*.html").on("change", browserSync.reload);
     gulp.watch(dirname + "/*.js").on("change", browserSync.reload);
 });
