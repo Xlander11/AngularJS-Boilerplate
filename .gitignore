@@ -1,3 +1,8 @@
 /.idea
 /node_modules
+/www/css/style.css
+/www/js/functions.js
+/www/js/functions-min.js
+/www/index.html
+/www/build
 /.sass-cache

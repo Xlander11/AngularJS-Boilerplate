@@ -1,6 +1,6 @@
 {
   "name": "AngularJS_Boilerplate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Boilerplate for Angular JS",
   "dependencies": {
     "gulp": "*",
@@ -13,6 +13,11 @@
   "devDependencies": {
     "gulp-util": "*",
     "gulp-watch": "*",
-    "gulp-compass": "*"
+    "gulp-compass": "*",
+    "gulp-include-source": "*",
+    "gulp-minify-css": "*",
+    "gulp-minify": "*",
+    "gulp-clean": "*",
+    "run-sequence": "*"
   }
 }

@@ -6,9 +6,9 @@ http_path = "/"
 css_dir = "www/css"
 sass_dir = "www/scss"
 img_path = "www/img"
-line_comments = false
+line_comments = true
 preferred_syntax = :scss
-output_style = :compressed #:compressed #:expanded
+#output_style = :compressed #:compressed #:expanded
 relative_assets = true
 
 #sass_options = {:sourcemap => true}

@@ -18,7 +18,7 @@
     function MenuItem(CONSTANTS, $rootScope, $state) {
         var directive = {
             restrict: "EA",
-            templateUrl: CONSTANTS.js + "/menu/menu.item.html",
+            templateUrl: CONSTANTS.components + "/menu/menu.item.html",
             scope: {
                 item: "=item"
             },

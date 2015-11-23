@@ -9,7 +9,7 @@
         .config(config)
         .constant("CONSTANTS", {
             assets: "",
-            js: "js"
+            components: "components"
         });
 
     function config($stateProvider, $urlRouterProvider){

@@ -20,7 +20,7 @@
     function Menu(CONSTANTS, $rootScope, $state, services) {
         var directive = {
             restrict: 'EA',
-            templateUrl: CONSTANTS.js + "/menu/menu.html",
+            templateUrl: CONSTANTS.components + "/menu/menu.html",
             link: link,
             controller: MenuController,
             /*
