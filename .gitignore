@@ -6,3 +6,6 @@
 /www/index.html
 /www/build
 /.sass-cache
+/www/build/js
+/www/build/css
+/www/build/index.html
