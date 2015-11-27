@@ -4,8 +4,9 @@
 /www/js/functions.js
 /www/js/functions-min.js
 /www/index.html
-/www/build
 /.sass-cache
 /www/build/js
+/www/build/views
+/www/build/components
 /www/build/css
 /www/build/index.html

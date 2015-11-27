@@ -15,7 +15,8 @@ var browserify = require("browserify"),
     minifyCss = require("gulp-minify-css"),
     minifyJs = require("gulp-minify"),
     clean = require("gulp-clean"),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    fs = require("fs");
 
 var dirname = "./www";
 var build = dirname + "/build";
@@ -27,6 +28,9 @@ gulp.task("default", function () {
 gulp.task("html", function () {
     return gulp.src(dirname + "/index.tpl.html" )
         .pipe( includeSources() )
+        .pipe(inject(
+            gulp.src(['./src/app/**/*.js']).pipe(angularFilesort())
+        ))
         .pipe(rename(dirname + "/index.html"))
         .pipe( gulp.dest("./"));
 });
@@ -42,18 +46,26 @@ gulp.task("compass", function() {
 });
 
 gulp.task("scripts", function () {
-    return gulp.src([
-        dirname + "/lib/jquery-1.11.3.min.js",
-        dirname + "/lib/angular.min.js",
-        dirname + "/lib/angular-ui-router.min.js",
-        dirname + "/app.module.js",
-        dirname + "/app.config.js",
-        dirname + "/components/**/*.js"
-    ])
+    var vendorList = fs.readFileSync("./vendorList.txt", "utf8");
+    vendorList = vendorList.replace(/\r/g, "").replace(/\n/g, " ").split(" ");
+    var scriptList = fs.readFileSync("./scriptList.txt", "utf8");
+    scriptList = scriptList.replace(/\r/g, "").replace(/\n/g, " ").split(" ");
+
+    vendorList.push("components/**/*.js");
+
+    var scripts = vendorList.concat(scriptList);
+
+    scripts = scripts.map(function (val) {
+        return [dirname, "/", val].join("");
+    });
+
+    return gulp.src(scripts)
         .pipe(sourcemaps.init())
         .pipe(concat("functions.js"))
         .pipe(sourcemaps.write())
-        .pipe(minifyJs())
+        .pipe(minifyJs({
+            mangle: false
+        }))
         .pipe(gulp.dest(dirname + "/js/"));
 });
 
@@ -71,10 +83,16 @@ gulp.task('clean', function () {
 });
 
 gulp.task('buildHtml', function () {
-    return gulp.src(dirname + "/index.build.tpl.html" )
+    gulp.src(dirname + "/index.build.tpl.html" )
         .pipe( includeSources() )
         .pipe(rename(build + "/index.html"))
         .pipe( gulp.dest("./"));
+
+    gulp.src([dirname + "/components/**/*.html"])
+        .pipe(gulp.dest(build + "/components"));
+
+    gulp.src([dirname + "/views/*.html"])
+        .pipe(gulp.dest(build + "/views"));
 });
 
 gulp.task('buildScript', function () {
@@ -98,6 +116,8 @@ gulp.task("browser-sync", function() {
     gulp.watch(dirname + "/components/**/*.js").on("change", browserSync.reload);
     gulp.watch(dirname + "/*.js").on("change", browserSync.reload);
     gulp.watch(dirname + "/views/*.html").on("change", browserSync.reload);
+    gulp.watch(dirname + "/*.tpl.html", ["html"]);
+    gulp.watch("./*.txt", ["html"]);
     gulp.watch(dirname + "/*.html").on("change", browserSync.reload);
     gulp.watch(dirname + "/components/**/*.html").on("change", browserSync.reload);
 });
