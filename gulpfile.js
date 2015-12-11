@@ -28,9 +28,6 @@ gulp.task("default", function () {
 gulp.task("html", function () {
     return gulp.src(dirname + "/index.tpl.html" )
         .pipe( includeSources() )
-        .pipe(inject(
-            gulp.src(['./src/app/**/*.js']).pipe(angularFilesort())
-        ))
         .pipe(rename(dirname + "/index.html"))
         .pipe( gulp.dest("./"));
 });
